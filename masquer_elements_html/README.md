@@ -42,11 +42,6 @@ Vous pouvez modifier certains aspects du script pour l'adapter à vos besoins :
 - **Couleur de surbrillance** : Changez la valeur de `highlightColor` dans le script.
 - **Comportement du bouton flottant** : Ajustez le style CSS directement dans le code.
 
-## Contributions
-Les suggestions et contributions sont les bienvenues ! N'hésitez pas à ouvrir une pull request ou une issue pour proposer des améliorations.
-
 ## Auteur
 **Julien**
 
-## Licence
-Ce UserScript est sous licence MIT. Consultez le fichier [LICENSE](LICENSE) pour plus de détails.
