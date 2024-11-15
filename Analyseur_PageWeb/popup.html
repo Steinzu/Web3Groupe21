@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 400px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .metric {
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .value {
+            font-weight: bold;
+            color: #2196F3;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .tab {
+            padding: 8px 15px;
+            cursor: pointer;
+            background: #e0e0e0;
+            border: none;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background: #2196F3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>Analyseur de Page Web</h2>
+    
+    <div class="tabs">
+        <button class="tab active" data-tab="content">Contenu</button>
+        <button class="tab" data-tab="seo">SEO</button>
+        <button class="tab" data-tab="perf">Performance</button>
+        <button class="tab" data-tab="help">Aide</button>
+    </div>
+
+    <!-- Onglet Contenu -->
+    <div id="content" class="tab-content active">
+        <div class="section">
+            <h3>Statistiques du Contenu</h3>
+            <div class="metric">
+                <span>Nombre de mots :</span>
+                <span id="wordCount" class="value">0</span>
+            </div>
+            <div class="metric">
+                <span>Nombre total d'images :</span>
+                <span id="totalImages" class="value">0</span>
+            </div>
+            <div class="metric">
+                <span>Images avec attribut alt :</span>
+                <span id="imagesWithAlt" class="value">0</span>
+            </div>
+            <div class="metric">
+                <span>Images sans attribut alt :</span>
+                <span id="imagesWithoutAlt" class="value">0</span>
+            </div>
+            <div class="metric">
+                <span>Nombre de liens :</span>
+                <span id="linkCount" class="value">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Onglet SEO -->
+    <div id="seo" class="tab-content">
+        <div class="section">
+            <h3>Évaluation du Référencement</h3>
+            <div class="metric">
+                <span>Titre de la page :</span>
+                <span id="pageTitle" class="value">-</span>
+            </div>
+            <div class="metric">
+                <span>Longueur du titre :</span>
+                <span id="titleLength" class="value">0 caractères</span>
+            </div>
+            <div class="metric">
+                <span>Meta description :</span>
+                <span id="metaDesc" class="value">-</span>
+            </div>
+            <div class="metric">
+                <span>Longueur de la description :</span>
+                <span id="metaDescLength" class="value">0 caractères</span>
+            </div>
+            <div class="metric">
+                <span>Structure H1-H3 :</span>
+                <span id="headings" class="value">-</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Onglet Performance -->
+    <div id="perf" class="tab-content">
+        <div class="section">
+            <h3>Performance</h3>
+            <div class="metric">
+                <span>Temps de chargement :</span>
+                <span id="loadTime" class="value">0 ms</span>
+            </div>
+            <div class="metric">
+                <span>Taille de la page :</span>
+                <span id="pageSize" class="value">0 KB</span>
+            </div>
+            <div class="section">
+                <h3>Recommandations</h3>
+                <ul id="recommendations" class="value">
+                    <li>Aucune recommandation spécifique</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h3>Erreurs HTML</h3>
+                <ul id="htmlValidationErrors" class="value">
+                    <li>Aucune erreur HTML détectée</li>
+                </ul>
+            </div>
+            <div class="metric">
+                <span>Nombre de ressources externes :</span>
+                <span id="externalResourcesSize" class="value">0</span>
+            </div>
+            <div class="metric">
+                <span>Ressources externes :</span>
+                <ul id="externalResources" class="value"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Onglet Aide -->
+    <div id="help" class="tab-content">
+        <div class="section">
+            <h3>Documentation</h3>
+            <p>Bienvenue dans l'onglet Aide. Voici des explications sur les fonctionnalités :</p>
+            <ul>
+                <li><strong>Contenu :</strong> Analyse la densité de contenu, le nombre de mots, images, et liens.</li>
+                <li><strong>SEO :</strong> Fournit des informations sur la qualité des balises de titre et description pour un meilleur référencement.</li>
+                <li><strong>Performance :</strong> Mesure le temps de chargement et la taille de la page.</li>
+                <li><strong>Recommandations :</strong> Suggestions pour améliorer la vitesse, l’accessibilité et le SEO.</li>
+                <li><strong>Validation HTML :</strong> Détecte les erreurs de balisage HTML comme les balises non fermées.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
