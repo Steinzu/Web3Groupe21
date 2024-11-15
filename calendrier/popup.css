@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    overflow-y: auto;
+  }
+  
+  .calendar {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .arrow {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .daysOfWeek, .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+  }
+  
+  .days span {
+    padding: 10px 0;
+  }
+  
+  .current-day {
+    color: blue;
+    font-weight: bold;
+  }
+  
+  .event {
+    color: red;
+  }
+  
+  .monthly-events {
+    margin-top: 20px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .monthly-events h3 {
+    margin-top: 0;
+  }
+  
+  .event-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .event-item:last-child {
+    border-bottom: none;
+  }
+  
+  .event-date {
+    font-weight: bold;
+  }
+  
+  .event-title {
+    font-size: 1.1em;
+    margin-top: 5px;
+    margin-bottom: 3px;
+  }
+  
+  .event-details {
+    font-size: 0.9em;
+    color: #555;
+  }
+  
+  .event-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 250px;
+    z-index: 10;
+  }
+  
