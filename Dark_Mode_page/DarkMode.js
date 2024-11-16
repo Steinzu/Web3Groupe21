@@ -145,7 +145,6 @@
         }
     `;
 
-    // Le reste du code reste identique
     const styleElement = document.createElement('style');
     styleElement.id = 'simple-dark-mode';
     styleElement.textContent = darkStyle;
