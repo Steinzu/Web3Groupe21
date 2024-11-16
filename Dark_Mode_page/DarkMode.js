@@ -1,23 +1,23 @@
 // ==UserScript==
 // @name         Dark Mode
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Change le fond en sombre et les textes en blanc
-// @author       Votre nom
+// @author       Tarik
 // @match        *://*/*
 // @grant        GM_setValue
 // @grant        GM_getValue
 // ==/UserScript==
 
+//(*://*.wikipedia.org/*)
+
 (function() {
     'use strict';
 
-    // Récupérer l'état du dark mode (cette ligne sert a stocké l'état du site dans la session de l'utilisateur)
     let isDarkMode = GM_getValue('darkMode', false);
 
-    // Style du dark mode avec gestion des hovers
     const darkStyle = `
-        /* Fonds principaux */
+        /* Reset général pour tous les conteneurs principaux */
         body,
         #content,
         #mw-content-text,
@@ -28,24 +28,44 @@
         .main-content,
         div[role="main"],
         #main-content,
-        #main {
+        #main,
+        .vector-body,
+        .mw-page-container,
+        .mw-content-container,
+        .parsoid-body,
+        .mw-parser-output,
+        [class*="content-"],
+        [class*="container-"] {
             background-color: #1a1a1a !important;
             color: #ffffff !important;
         }
 
-        /* Conteneurs avec fond blanc */
-        div[style*="background-color: white"],
-        div[style*="background-color: #fff"],
-        div[style*="background-color: #ffffff"],
-        div[style*="background: white"],
-        div[style*="background: #fff"],
-        div[style*="background: #ffffff"] {
+        /* Ciblage spécifique des divs avec background inline */
+        div[style*="background"],
+        section[style*="background"],
+        article[style*="background"],
+        aside[style*="background"] {
             background-color: #1a1a1a !important;
+            background-image: none !important;
         }
 
-        /* Tous les textes et titres */
+        /* Headers et navigation */
+        header,
+        nav,
+        .header,
+        .navigation,
+        #mw-head,
+        #mw-panel,
+        .vector-header,
+        .navbar,
+        .nav-wrapper {
+            background-color: #222 !important;
+            color: #ffffff !important;
+        }
+
+        /* Textes et liens */
         h1, h2, h3, h4, h5, h6,
-        p, span, div,
+        p, span, div, li, td, th,
         .title, .heading,
         [class*="title"]:not(a):not(a *),
         [class*="heading"]:not(a):not(a *),
@@ -53,47 +73,83 @@
             color: #ffffff !important;
         }
 
-        /* Liens noirs uniquement (pas de modification des liens colorés) */
-        a[style*="color: black"],
-        a[style*="color: #000"],
-        a[style*="color:#000"],
-        a[style*="color: rgb(0, 0, 0)"],
-        a[style="color: black"],
-        a.text-black,
-        a.text-dark {
-            color: #ffffff !important;
+        /* Liens */
+        a:not(:hover) {
+            color: #6ea8fe !important;
         }
 
-        /* Pour les liens qui n'ont pas de couleur définie et sont noirs par défaut */
-        a:not([style*="color"]):not([class*="color"]):not(:hover) {
-            color: #ffffff !important;
+        a:visited:not(:hover) {
+            color: #b589d6 !important;
         }
 
-        /* Texte dans les éléments input */
+        a:hover {
+            color: #8bb9fe !important;
+        }
+
+        /* Éléments de formulaire */
         input, textarea, select {
             color: #ffffff !important;
             background-color: #333 !important;
+            border-color: #444 !important;
         }
 
-        /* Elements spécifiques pour les sites de contenu */
-        .meta-title:not(a),
-        .titlebar-title:not(a),
-        .title-text:not(a),
-        .synopsis:not(a),
-        .synopsis-text:not(a),
-        .movie-card-title:not(a),
-        [class*="titlebar"]:not(a),
-        [class*="meta-title"]:not(a) {
+        /* Tables */
+        table, tr, td, th {
+            background-color: #222 !important;
+            border-color: #444 !important;
+        }
+
+        /* Barres latérales et widgets */
+        aside,
+        .sidebar,
+        .widget,
+        #mw-panel,
+        .vector-menu-portal,
+        .vector-menu-content {
+            background-color: #222 !important;
             color: #ffffff !important;
+        }
+
+        /* Boîtes de code et préformatage */
+        pre, code, .code {
+            background-color: #2d2d2d !important;
+            color: #e0e0e0 !important;
+            border-color: #444 !important;
+        }
+
+        /* Images et médias */
+        img {
+            opacity: 0.9;
+        }
+
+        /* Popups et modals */
+        .popup,
+        .modal,
+        .dialog,
+        [class*="popup"],
+        [class*="modal"],
+        [class*="dialog"] {
+            background-color: #222 !important;
+            color: #ffffff !important;
+            border-color: #444 !important;
+        }
+
+        /* Spécifique à Wikipedia */
+        .mw-wiki-logo {
+            filter: invert(1) brightness(0.9);
+        }
+
+        #mw-page-base,
+        #mw-head-base {
+            background-color: #222 !important;
         }
     `;
 
-    // Créer l'élément style
+    // Le reste du code reste identique
     const styleElement = document.createElement('style');
     styleElement.id = 'simple-dark-mode';
     styleElement.textContent = darkStyle;
 
-    // Ajouter le bouton (à modifier si vous le souhaiter)
     const toggleButton = document.createElement('div');
     toggleButton.innerHTML = `
         <button id="dark-mode-toggle" style="
@@ -119,13 +175,11 @@
         </button>
     `;
 
-    // Ajouter les éléments à la page
     document.body.appendChild(toggleButton);
     if (isDarkMode) {
         document.head.appendChild(styleElement);
     }
 
-    // Gérer le clic sur le bouton
     document.getElementById('dark-mode-toggle').addEventListener('click', function() {
         isDarkMode = !isDarkMode;
         GM_setValue('darkMode', isDarkMode);
