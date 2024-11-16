@@ -1,4 +1,4 @@
-Je vais vous montrer trois exemples concrets pour comparer deux façons d’améliorer notre navigation web : les extensions Chrome et les userscripts. Les extensions sont des petites applications qui s’intègrent directement au navigateur, tandis que les userscripts sont des scripts qui modifient directement les pages web. Ces deux approches ont leurs avantages et leurs inconvénients, et chacune est plus adaptée à certains cas d’utilisation.
+Je vais vous montrer comment les extensions et les userscripts peuvent atteindre des résulsts similaire mais de différentes façons
 
 Nous allons explorer trois cas pratiques :
 
