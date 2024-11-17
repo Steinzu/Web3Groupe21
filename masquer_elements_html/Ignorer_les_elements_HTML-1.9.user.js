@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.9
 // @description  Masquer des parties du code HTML en cliquant dessus avec un encadré visuel et un bouton d'activation/désactivation, uniquement sur la page principale
-// @author       Julien
+// @author       Julien de Jacquier de Rosée
 // @match        *://*/*
 // @grant        none
 // ==/UserScript==
