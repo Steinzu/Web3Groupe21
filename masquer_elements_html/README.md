@@ -1,12 +1,13 @@
 # Ignorer les éléments HTML avec UserScript
 
 ## Description
-Ce UserScript vous permet de masquer facilement des éléments HTML d'une page web, y compris des iframes, en cliquant dessus. Une option d'activation et de désactivation est incluse, ainsi qu'un encadré visuel pour identifier la zone qui sera masquée.
+Ce UserScript vous permet de masquer facilement des éléments HTML d'une page web, y compris des iframes, en cliquant dessus. Une option d'activation et de désactivation est incluse, ainsi qu'un encadré visuel pour identifier la zone qui sera masquée. Le bouton d’activation peut être affiché ou masqué à l’aide d’un raccourci clavier "Ctrl + B".
 
 ## Fonctionnalités
 - Masquer n'importe quel élément HTML ou iframe en cliquant dessus.
 - Afficher un encadré en surbrillance pour indiquer l'élément sélectionné.
 - Activer ou désactiver la fonctionnalité via un bouton flottant.
+- Affichez ou masquez le bouton flottant avec un raccourci clavier, désactivant également le mode masquage si le bouton est masqué.
 - Support des iframes et des éléments dynamiques ajoutés après le chargement initial de la page.
 
 ## Prérequis
@@ -27,11 +28,12 @@ Ce UserScript vous permet de masquer facilement des éléments HTML d'une page w
 
 ## Utilisation
 1. Activez le script sur une page web.
-2. Un bouton "Activer/Désactiver" apparaît en haut à droite de la page.
-3. Cliquez sur "Activer" pour entrer en mode masquage.
-4. Survolez les éléments que vous souhaitez masquer : un encadré rouge apparaîtra autour.
-5. Cliquez sur un élément pour le masquer. Un message de confirmation s'affichera.
-6. Pour quitter le mode masquage, cliquez à nouveau sur "Désactiver".
+2.	Utilisez le raccourci clavier Ctrl + B (ou un autre configuré dans le script) pour afficher le bouton “Activer/Désactiver”.
+3. Un bouton "Activer/Désactiver" apparaît en haut à droite de la page.
+4. Cliquez sur "Activer" pour entrer en mode masquage.
+5. Survolez les éléments que vous souhaitez masquer : un encadré rouge apparaîtra autour.
+6. Cliquez sur un élément pour le masquer. Un message de confirmation s'affichera.
+7. Pour quitter le mode masquage, cliquez à nouveau sur "Désactiver" ou refaites le raccourci clavier Ctrl + B.
 
 ## Limites connues
 - Certains sites web très interactifs peuvent interférer avec le script.
@@ -43,5 +45,5 @@ Vous pouvez modifier certains aspects du script pour l'adapter à vos besoins :
 - **Comportement du bouton flottant** : Ajustez le style CSS directement dans le code.
 
 ## Auteur
-**Julien**
+**Julien de Jacquier de Rosée**
 
