@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Ignorer les éléments HTML avec activation
 // @namespace    http://tampermonkey.net/
-// @version      1.6
+// @version      1.9
 // @description  Masquer des parties du code HTML en cliquant dessus avec un encadré visuel et un bouton d'activation/désactivation, uniquement sur la page principale
 // @author       Julien
 // @match        *://*/*
@@ -11,48 +11,39 @@
 (function() {
     'use strict';
 
-    // Couleur de l'encadré pour l'élément survolé
     const highlightColor = 'red';
     const originalBorderStyle = '2px solid ' + highlightColor;
 
-    // Variable pour garder une référence de l'élément en survol
     let lastHoveredElement = null;
     let hideModeEnabled = false; // Mode masquage initialisé à "désactivé"
+    let buttonVisible = false; // État d'affichage du bouton (par défaut, invisible)
 
     // Fonction pour masquer l'élément cliqué
     function hideElement(event) {
-        if (!hideModeEnabled) return; // Ne rien faire si le mode est désactivé
-
-        // Vérifie que l'élément cliqué n'est pas le bouton lui-même
+        if (!hideModeEnabled) return;
         if (event.target === toggleButton) return;
 
         event.preventDefault();
         event.stopPropagation();
 
-        // Appliquer un style "display: none" à l'élément cliqué
         event.target.style.display = 'none';
-
         alert('Élément masqué');
     }
 
     // Fonction pour afficher un encadré lors du survol
     function highlightElement(event) {
-        if (!hideModeEnabled) return; // Ne pas surligner si le mode est désactivé
-
-        // Vérifie que l'élément survolé n'est pas le bouton lui-même
+        if (!hideModeEnabled) return;
         if (event.target === toggleButton) return;
 
-        // Supprimer l'encadré de l'élément précédemment survolé
         if (lastHoveredElement) {
             lastHoveredElement.style.outline = '';
         }
 
-        // Ajouter un encadré à l'élément actuellement survolé
         event.target.style.outline = originalBorderStyle;
         lastHoveredElement = event.target;
     }
 
-    // Fonction pour retirer l'encadré lorsque la souris quitte l'élément
+    // Fonction pour retirer l'encadré
     function removeHighlight(event) {
         event.target.style.outline = '';
         lastHoveredElement = null;
@@ -62,6 +53,18 @@
     function toggleHideMode() {
         hideModeEnabled = !hideModeEnabled;
         toggleButton.textContent = hideModeEnabled ? 'Désactiver' : 'Activer';
+    }
+
+    // Fonction pour afficher ou masquer le bouton, et désactiver le mode si le bouton est masqué
+    function toggleButtonVisibility() {
+        buttonVisible = !buttonVisible;
+        toggleButton.style.display = buttonVisible ? 'block' : 'none';
+
+        // Si le bouton est masqué, désactiver également le mode masquage
+        if (!buttonVisible && hideModeEnabled) {
+            hideModeEnabled = false;
+            toggleButton.textContent = 'Activer'; // Remettre le texte par défaut
+        }
     }
 
     // Créer le bouton d'activation/désactivation
@@ -77,6 +80,7 @@
     toggleButton.style.border = 'none';
     toggleButton.style.borderRadius = '5px';
     toggleButton.style.cursor = 'pointer';
+    toggleButton.style.display = 'none'; // Par défaut, invisible
 
     // Ajouter l'événement de clic pour basculer le mode
     toggleButton.addEventListener('click', toggleHideMode);
@@ -89,7 +93,15 @@
     document.body.addEventListener('mouseout', removeHighlight, true);
     document.body.addEventListener('click', hideElement, true);
 
-    // Fonction pour ajouter les écouteurs d'événements aux iFrames
+    // Ajouter un écouteur pour le raccourci clavier
+    document.addEventListener('keydown', (event) => {
+        // Vérifier si la touche est "Ctrl + B" (modifiez selon vos besoins)
+        if (event.ctrlKey && event.key === 'b') {
+            toggleButtonVisibility();
+        }
+    });
+
+    // Fonction pour gérer les iFrames
     function addIframeListeners(iframe) {
         iframe.addEventListener('mouseover', function(event) {
             if (!hideModeEnabled) return;
@@ -114,7 +126,7 @@
         }, true);
     }
 
-    // Ajouter les écouteurs d'événements à tous les iFrames existants
+    // Ajouter les écouteurs aux iFrames existants
     document.querySelectorAll('iframe').forEach(addIframeListeners);
 
     // Observer les ajouts d'iFrames dynamiques
@@ -130,5 +142,3 @@
 
     observer.observe(document.body, { childList: true, subtree: true });
 })();
-
-
