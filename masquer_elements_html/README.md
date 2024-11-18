@@ -39,8 +39,9 @@ Ce UserScript vous permet de masquer facilement des éléments HTML ou des ifram
 
 ## Personnalisation
 Vous pouvez modifier certains aspects du script pour l'adapter à vos besoins :
-- **Couleur de surbrillance** : Changez la valeur de `highlightColor` dans le script.
-- **Comportement du bouton flottant** : Ajustez le style CSS directement dans le code.
+- **Couleur de surbrillance** : Modifiez la variable `highlightColor` dans le script.
+- **Position de l'indicateur** : Changez les propriétés CSS `bottom` et `right` de l'indicateur.
+- **Raccourci clavier** : Personnalisez la combinaison clavier en modifiant l'écouteur d'événements `keydown`.
 
 ## Auteur
 **Julien de Jacquier de Rosée**
