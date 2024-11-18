@@ -41,7 +41,7 @@
 1. **Accedez a l'extension depuis n'importe quelle page web**
     - Vous pouvez épingler l'extension, pour cela cliquez sur le boutton "Extensions" dans la barre d'outil de votre navigateur, cliquez sur l'engrenage de l'extension, puis sur "Epinglez à la barre d'outils.
 
-    - Ou alors ouvrir l'interface de l'extension avec le raccourcis clavier `CTRL + Y`.
+    - Ou alors ouvrir l'interface de l'extension avec le raccourcis clavier `CTRL + Y` (Cela ne marche pas sur tout les sites).
 
 ---
 
