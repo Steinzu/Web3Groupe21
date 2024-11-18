@@ -1,3 +1,5 @@
+console.log("popup.js chargé avec succès !");
+
 document.addEventListener("DOMContentLoaded", function () {
     const monthYearDisplay = document.getElementById("monthYear");
     const calendarDays = document.getElementById("calendarDays");
@@ -9,7 +11,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const addEventButton = document.getElementById("addEventButton");
     const closeModalButton = document.getElementById("closeModalButton");
     const monthlyEventsContainer = document.getElementById("monthlyEvents");
-    
+
+    console.log("Le script est bien chargé !");
+const testCSS = window.getComputedStyle(document.body).fontFamily;
+console.log("Police détectée :", testCSS);
+
+
     let currentDate = new Date();
     let events = JSON.parse(localStorage.getItem("events")) || {};
 
@@ -77,22 +84,40 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function deleteEvent(dateKey, eventIndex) {
+        if (events[dateKey]) {
+            events[dateKey].splice(eventIndex, 1); // Supprime l'événement
+            if (events[dateKey].length === 0) delete events[dateKey]; // Supprime la clé si vide
+            saveEvents();
+            updateCalendar();
+        }
+    }
+
     function displayMonthlyEvents() {
         monthlyEventsContainer.innerHTML = "";
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth() + 1;
-        
+
+        const eventsInMonth = Object.keys(events).filter(key => {
+            const [eventYear, eventMonth] = key.split("-");
+            return parseInt(eventYear) === year && parseInt(eventMonth) === month;
+        }).length;
+
+        document.querySelector("#monthlyEventsContainer h3").textContent = `Événements de ce mois (${eventsInMonth})`;
+
         Object.keys(events).forEach(dateKey => {
             const [eventYear, eventMonth, eventDay] = dateKey.split("-").map(Number);
             if (eventYear === year && eventMonth === month) {
-                events[dateKey].forEach(event => {
+                events[dateKey].forEach((event, index) => {
                     const eventItem = document.createElement("div");
                     eventItem.classList.add("event-item");
                     eventItem.innerHTML = `
                         <p class="event-date">Date: ${eventDay} ${monthYearDisplay.textContent}</p>
                         <p class="event-title">Titre: ${event.title}</p>
                         <p class="event-details">Détails: ${event.details}</p>
+                        <button class="delete-event">Supprimer</button>
                     `;
+                    eventItem.querySelector(".delete-event").onclick = () => deleteEvent(dateKey, index);
                     monthlyEventsContainer.appendChild(eventItem);
                 });
             }
