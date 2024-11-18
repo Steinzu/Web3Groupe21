@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Recherche Rapide",
+  "version": "2.0",
+  "description": "Recherchez rapidement sur plusieurs sites depuis votre navigateur.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "Search-icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Y"
+      },
+      "description": "Ouvrir l'extension Recherche Rapide"
+    }
+  }
+}
